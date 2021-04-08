@@ -1,0 +1,92 @@
+[
+  {
+    "questionText": "What is the capital of California?",
+    "time": 20,
+    "answerOptions": [
+      { "answerText": "New York", "isCorrect": false },
+      { "answerText": "London", "isCorrect": false },
+      { "answerText": "Sacramento", "isCorrect": true },
+      { "answerText": "Illinois", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "Who founded Microsoft?",
+    "time": 18,
+    "answerOptions": [
+      { "answerText": "Harry Potter", "isCorrect": false },
+      { "answerText": "Tim Cook", "isCorrect": false },
+      { "answerText": "Bill Gates", "isCorrect": true },
+      { "answerText": "Elon Musk", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "The iPhone was created by which company?",
+    "time": 15,
+    "answerOptions": [
+      { "answerText": "Apple", "isCorrect": true },
+      { "answerText": "Expedia", "isCorrect": false },
+      { "answerText": "Amazon", "isCorrect": false },
+      { "answerText": "Google", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "Where is Miami?",
+    "time": 12,
+    "answerOptions": [
+      { "answerText": "Indiana", "isCorrect": false },
+      { "answerText": "Oregon", "isCorrect": false },
+      { "answerText": "Nevada", "isCorrect": false },
+      { "answerText": "Florida", "isCorrect": true }
+    ]
+  },
+  {
+    "questionText": "Who wants to go to Mars?",
+    "time": 10,
+    "answerOptions": [
+      { "answerText": "Elon Musk", "isCorrect": true },
+      { "answerText": "Neil Armstrong", "isCorrect": false },
+      { "answerText": "Richard", "isCorrect": false },
+      { "answerText": "Amelia Earhart", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is 2+4?",
+    "time": 8,
+    "answerOptions": [
+      { "answerText": "6", "isCorrect": true },
+      { "answerText": "3", "isCorrect": false },
+      { "answerText": "5", "isCorrect": false },
+      { "answerText": "2", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is 10-6?",
+    "time": 7,
+    "answerOptions": [
+      { "answerText": "3", "isCorrect": false },
+      { "answerText": "21", "isCorrect": false },
+      { "answerText": "4", "isCorrect": true },
+      { "answerText": "11", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is 10/2?",
+    "time": 5,
+    "answerOptions": [
+      { "answerText": "3", "isCorrect": false },
+      { "answerText": "5", "isCorrect": true },
+      { "answerText": "2", "isCorrect": false },
+      { "answerText": "11", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is 15*2?",
+    "time": 5,
+    "answerOptions": [
+      { "answerText": "34", "isCorrect": false },
+      { "answerText": "30", "isCorrect": true },
+      { "answerText": "22", "isCorrect": false },
+      { "answerText": "119", "isCorrect": false }
+    ]
+  }
+]
