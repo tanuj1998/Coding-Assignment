@@ -17,11 +17,12 @@ for (let i = 0; i < questions.length; i++) {
   queues[i % N].push(questions[i]);
 }
 
-const queueTimer = []; //Store how much time to allow for questions from each queue
-let time = config.hardestBoxTime;
+//Assign timer to each queue
+const queueTimes = []; //Store how much time to allow for questions from each queue
+let queueTime = config.hardestBoxTime;
 for (let i = 0; i < queues.length; i++) {
-  queueTimer.push(time);
-  time = time - config.timeDecrement;
+  queueTimes.push(queueTime);
+  queueTime = queueTime - config.timeDecrement;
 }
 
 /*
@@ -67,8 +68,8 @@ const handleQuestionQueue = ({ question, queueIndex }, isCorrect) => {
  */
 
 //Decides what queue to pick the question from
-const QuestionPicker = () => {
-  const queueIndex = QuestionProbability();
+const questionPicker = () => {
+  const queueIndex = questionProbability();
 
   console.log("Index received: " + queueIndex);
   if (queues[queueIndex].length > 0) {
@@ -80,12 +81,12 @@ const QuestionPicker = () => {
       queueIndex,
     };
   } else {
-    return QuestionPicker();
+    return questionPicker();
   }
 };
 
 //Sends queueIndex to question picker
-const QuestionProbability = () => {
+const questionProbability = () => {
   let ans = []; //Final array
   let n = queues.length;
   let count = 0;
@@ -110,4 +111,4 @@ const QuestionProbability = () => {
 };
 
 export { handleQuestionQueue };
-export default QuestionPicker;
+export default questionPicker;

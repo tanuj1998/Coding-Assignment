@@ -3,7 +3,7 @@ import "./main.css";
 import QuizTimer from "../Timer/QuizTimer";
 import QuestionTimer from "../Timer/QuestionTimer";
 import QuestionCard from "../Questions/QuestionCard";
-import QuestionPicker, {
+import questionPicker, {
   handleQuestionQueue,
 } from "../Questions/QuestionPicker";
 import config from "../../config.json";
@@ -11,7 +11,7 @@ import config from "../../config.json";
  * question data contains a question and the queue index from which the question
  * was picked
  */
-const initialQuestionData = QuestionPicker(0);
+const initialQuestionData = questionPicker(0);
 let totalQuestions = 0; //Total number of questions answered during the session
 export default function Main() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0);
@@ -25,26 +25,33 @@ export default function Main() {
 
   //For total quiz timer
   useEffect(() => {
-    if (quizSeconds > 0) {
-      setTimeout(() => setQuizSeconds(quizSeconds - 1), 1000);
-    } else {
-      setShowScore(true);
-    }
-  });
-
-  //For current question timer
-  useEffect(() => {
-    if (questionSeconds > 0) {
-      setTimeout(() => setQuestionSeconds(questionSeconds - 1), 1000);
-    } else {
-      const nextQuestionNumber = currentQuestionNumber + 1;
-      //totalQuestions+1 will always be greater tah nextQuestNumber that way questions will keep appearing until timer runs out
-      if (nextQuestionNumber < totalQuestions + 1) {
-        setCurrentQuestionNumber(nextQuestionNumber);
-        setCurrentQuestionData(QuestionPicker());
+    if (!showScore) {
+      if (quizSeconds > 0) {
+        const timer = setTimeout(() => setQuizSeconds(quizSeconds - 1), 1000);
+        return () => clearInterval(timer);
+      } else {
+        setShowScore(true);
       }
     }
-  });
+  }, [showScore, quizSeconds]);
+
+  //For current question timer
+  // useEffect(() => {
+  //   if (questionSeconds > 0) {
+  //     setTimeout(() => setQuestionSeconds(questionSeconds - 1), 1000);
+  //   } else {
+  //     const nextQuestionNumber = currentQuestionNumber + 1;
+  //     //totalQuestions+1 will always be greater tah nextQuestNumber that way questions will keep appearing until timer runs out
+  //     if (nextQuestionNumber < totalQuestions + 1) {
+  //       setCurrentQuestionNumber(nextQuestionNumber);
+  //       setCurrentQuestionData(questionPicker());
+  //     }
+  //   }
+  //   const timer = setTimeout(() => {});
+
+  //   // clean up / cancel the current question's timer
+  //   return () => clearTimeout(timer);
+  // }, [questionData, questionSeconds]);
 
   const handleAnswerOptionClick = (questionData, isCorrect) => {
     // update algorithm related data structures
@@ -56,10 +63,10 @@ export default function Main() {
       setScore(score + 1);
     }
     const nextQuestionNumber = currentQuestionNumber + 1;
-    //totalQuestions+1 will always be greater tah nextQuestNumber that way questions will keep appearing until timer runs out
+    //totalQuestions+1 will always be greater than nextQuestNumber that way questions will keep appearing until timer runs out
     if (nextQuestionNumber < totalQuestions + 1) {
       setCurrentQuestionNumber(nextQuestionNumber);
-      setCurrentQuestionData(QuestionPicker());
+      setCurrentQuestionData(questionPicker());
     }
   };
 
