@@ -55,7 +55,7 @@ const handleQuestionQueue = ({ question, queueIndex }, isCorrect) => {
     queues[0].push(question);
   }
 
-  // debugger;
+  debugger;
 };
 
 /**
@@ -77,7 +77,7 @@ const questionPicker = () => {
     return {
       question,
       // TODO: specify from bucket and bucket time info
-      questionTime: 5,
+      questionTime: queueTimes[queueIndex],
       queueIndex,
     };
   } else {

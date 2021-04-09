@@ -21,14 +21,16 @@ export default function Main() {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [quizSeconds, setQuizSeconds] = useState(config.quizTime);
-  const [questionSeconds, setQuestionSeconds] = useState(10);
+  const [questionSeconds, setQuestionSeconds] = useState(
+    initialQuestionData.questionTime
+  );
 
   //For total quiz timer
   useEffect(() => {
     if (!showScore) {
       if (quizSeconds > 0) {
         const timer = setTimeout(() => setQuizSeconds(quizSeconds - 1), 1000);
-        return () => clearInterval(timer);
+        return () => clearTimeout(timer);
       } else {
         setShowScore(true);
       }
@@ -36,6 +38,19 @@ export default function Main() {
   }, [showScore, quizSeconds]);
 
   //For current question timer
+  useEffect(() => {
+    if (questionSeconds > 0) {
+      const timer = setTimeout(
+        () => setQuestionSeconds(questionSeconds - 1),
+        1000
+      );
+      return () => clearTimeout(timer);
+    } else {
+      //Todo: Move question data to queue 0
+      //Show next question with its timer
+      handleAnswerOptionClick(currentQuestionData, false);
+    }
+  }, [questionSeconds, currentQuestionData]);
   // useEffect(() => {
   //   if (questionSeconds > 0) {
   //     setTimeout(() => setQuestionSeconds(questionSeconds - 1), 1000);
@@ -62,12 +77,13 @@ export default function Main() {
     if (isCorrect) {
       setScore(score + 1);
     }
-    const nextQuestionNumber = currentQuestionNumber + 1;
-    //totalQuestions+1 will always be greater than nextQuestNumber that way questions will keep appearing until timer runs out
-    if (nextQuestionNumber < totalQuestions + 1) {
-      setCurrentQuestionNumber(nextQuestionNumber);
-      setCurrentQuestionData(questionPicker());
-    }
+    setCurrentQuestionNumber(
+      (currentQuestionNumber) => currentQuestionNumber + 1
+    );
+    questionData = questionPicker();
+    let questionSeconds = questionData.questionTime;
+    setCurrentQuestionData(questionData);
+    setQuestionSeconds(questionSeconds);
   };
 
   return (
