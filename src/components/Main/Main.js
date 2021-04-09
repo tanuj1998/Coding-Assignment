@@ -6,7 +6,7 @@ import QuestionCard from "../Questions/QuestionCard";
 import QuestionPicker, {
   handleQuestionQueue,
 } from "../Questions/QuestionPicker";
-
+import config from "../../config.json";
 /**
  * question data contains a question and the queue index from which the question
  * was picked
@@ -20,13 +20,13 @@ export default function Main() {
   );
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-  const [seconds, setSeconds] = useState(30);
+  const [quizSeconds, setQuizSeconds] = useState(config.quizTime);
   const [questionSeconds, setQuestionSeconds] = useState(10);
 
   //For total quiz timer
   useEffect(() => {
-    if (seconds > 0) {
-      setTimeout(() => setSeconds(seconds - 1), 1000);
+    if (quizSeconds > 0) {
+      setTimeout(() => setQuizSeconds(quizSeconds - 1), 1000);
     } else {
       setShowScore(true);
     }
@@ -45,6 +45,7 @@ export default function Main() {
       }
     }
   });
+
   const handleAnswerOptionClick = (questionData, isCorrect) => {
     // update algorithm related data structures
     handleQuestionQueue(questionData, isCorrect);
@@ -79,7 +80,7 @@ export default function Main() {
       {showScore ? (
         <div className="app">
           <div className="score-section">
-            {totalQuestions != 0 && (
+            {totalQuestions !== 0 && (
               <>
                 <p>
                   You answered {score} out of {totalQuestions} questions
@@ -88,7 +89,7 @@ export default function Main() {
                 <p>You scored {((score / totalQuestions) * 100).toFixed(2)}%</p>
               </>
             )}
-            {totalQuestions == 0 && (
+            {totalQuestions === 0 && (
               <>
                 <p>
                   You answered {score} out of {totalQuestions} questions
@@ -101,7 +102,7 @@ export default function Main() {
         </div>
       ) : (
         <>
-          <QuizTimer seconds={seconds} />
+          <QuizTimer seconds={quizSeconds} />
           <div className="app">
             <div className="question-section">
               <QuestionTimer seconds={questionSeconds} />

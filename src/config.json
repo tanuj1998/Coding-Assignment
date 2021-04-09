@@ -1,0 +1,6 @@
+{
+  "boxesNumber": 3,
+  "quizTime": 3000,
+  "hardestBoxTime": 15,
+  "timeDecrement": 5
+}

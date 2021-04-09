@@ -1,9 +1,9 @@
 //Picks a question to send to question display
 import questions from "../../questions.json";
-
-const N = 3;
+import config from "../../config.json";
+const N = config.boxesNumber;
+console.log(N);
 const queues = [];
-const score = 0;
 //Push queues depending upon N
 // [[], [], []]
 for (let i = 0; i < N; i++) {
@@ -15,6 +15,13 @@ for (let i = 0; i < N; i++) {
 //Push questions to different queues
 for (let i = 0; i < questions.length; i++) {
   queues[i % N].push(questions[i]);
+}
+
+const queueTimer = []; //Store how much time to allow for questions from each queue
+let time = config.hardestBoxTime;
+for (let i = 0; i < queues.length; i++) {
+  queueTimer.push(time);
+  time = time - config.timeDecrement;
 }
 
 /*
@@ -34,7 +41,7 @@ const handleQuestionQueue = ({ question, queueIndex }, isCorrect) => {
   if (isCorrect) {
     //TODO: increase score if answered correctly
     //If question is not in last queue and answered correctly, move to next queue
-    if (queueIndex != N - 1) {
+    if (queueIndex !== N - 1) {
       queues[queueIndex + 1].push(question);
     }
 
@@ -66,7 +73,12 @@ const QuestionPicker = () => {
   console.log("Index received: " + queueIndex);
   if (queues[queueIndex].length > 0) {
     const question = queues[queueIndex].shift();
-    return { question, queueIndex };
+    return {
+      question,
+      // TODO: specify from bucket and bucket time info
+      questionTime: 5,
+      queueIndex,
+    };
   } else {
     return QuestionPicker();
   }

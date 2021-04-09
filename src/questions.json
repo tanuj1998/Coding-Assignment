@@ -1,7 +1,6 @@
 [
   {
     "questionText": "What is the capital of California?",
-    "time": 20,
     "answerOptions": [
       { "answerText": "New York", "isCorrect": false },
       { "answerText": "London", "isCorrect": false },
@@ -11,7 +10,6 @@
   },
   {
     "questionText": "Who founded Microsoft?",
-    "time": 18,
     "answerOptions": [
       { "answerText": "Harry Potter", "isCorrect": false },
       { "answerText": "Tim Cook", "isCorrect": false },
@@ -21,7 +19,6 @@
   },
   {
     "questionText": "The iPhone was created by which company?",
-    "time": 15,
     "answerOptions": [
       { "answerText": "Apple", "isCorrect": true },
       { "answerText": "Expedia", "isCorrect": false },
@@ -31,7 +28,6 @@
   },
   {
     "questionText": "Where is Miami?",
-    "time": 12,
     "answerOptions": [
       { "answerText": "Indiana", "isCorrect": false },
       { "answerText": "Oregon", "isCorrect": false },
@@ -41,7 +37,6 @@
   },
   {
     "questionText": "Who wants to go to Mars?",
-    "time": 10,
     "answerOptions": [
       { "answerText": "Elon Musk", "isCorrect": true },
       { "answerText": "Neil Armstrong", "isCorrect": false },
@@ -51,7 +46,6 @@
   },
   {
     "questionText": "What is 2+4?",
-    "time": 8,
     "answerOptions": [
       { "answerText": "6", "isCorrect": true },
       { "answerText": "3", "isCorrect": false },
@@ -61,7 +55,6 @@
   },
   {
     "questionText": "What is 10-6?",
-    "time": 7,
     "answerOptions": [
       { "answerText": "3", "isCorrect": false },
       { "answerText": "21", "isCorrect": false },
@@ -71,7 +64,6 @@
   },
   {
     "questionText": "What is 10/2?",
-    "time": 5,
     "answerOptions": [
       { "answerText": "3", "isCorrect": false },
       { "answerText": "5", "isCorrect": true },
@@ -81,7 +73,6 @@
   },
   {
     "questionText": "What is 15*2?",
-    "time": 5,
     "answerOptions": [
       { "answerText": "34", "isCorrect": false },
       { "answerText": "30", "isCorrect": true },
