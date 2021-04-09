@@ -1,5 +1,8 @@
 # Coding Assignment
 
+This quiz is based on spaced repetition learning method. Newer and harder questions appear more frequetly and
+older and easier questions appear less frequently.
+
 # Installation & Usage
 
     (Must have node.js installed on the machine)

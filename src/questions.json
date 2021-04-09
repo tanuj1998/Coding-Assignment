@@ -79,5 +79,48 @@
       { "answerText": "22", "isCorrect": false },
       { "answerText": "119", "isCorrect": false }
     ]
+  },
+  {
+    "questionText": "What is sqrt(16)?",
+    "answerOptions": [
+      { "answerText": "14", "isCorrect": false },
+      { "answerText": "4", "isCorrect": true },
+      { "answerText": "6", "isCorrect": false },
+      { "answerText": "1", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "How tall in Empire State Building?",
+    "answerOptions": [
+      { "answerText": "420 meters", "isCorrect": false },
+      { "answerText": "376 meters", "isCorrect": false },
+      { "answerText": "413 meters", "isCorrect": false },
+      { "answerText": "381 meters", "isCorrect": true }
+    ]
+  },
+  {
+    "questionText": "Who won the 2020 presidential election?",
+    "answerOptions": [
+      { "answerText": "Donald Trump", "isCorrect": false },
+      { "answerText": "Joe Biden", "isCorrect": true }
+    ]
+  },
+  {
+    "questionText": "Which country is Brie cheese originally from?",
+    "answerOptions": [
+      { "answerText": "Italy", "isCorrect": false },
+      { "answerText": "Belgium", "isCorrect": false },
+      { "answerText": "France", "isCorrect": true },
+      { "answerText": "Ireland", "isCorrect": false }
+    ]
+  },
+  {
+    "questionText": "What is capital of Iceland?",
+    "answerOptions": [
+      { "answerText": "Selfoss", "isCorrect": false },
+      { "answerText": "Akranes", "isCorrect": false },
+      { "answerText": "Reykjavik", "isCorrect": true },
+      { "answerText": "Gardabaer", "isCorrect": false }
+    ]
   }
 ]
