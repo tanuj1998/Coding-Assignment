@@ -1,9 +1,14 @@
+/*Screen to display the individual question timer.
+It takes seconds as its argument and converts it into mm:ss format
+*/
 import React from "react";
 
 export default function QuestionTimer({ seconds }) {
+  var h = Math.floor(seconds / 3600);
   var m = Math.floor((seconds % 3600) / 60);
   var s = Math.floor((seconds % 3600) % 60);
-  var mDisplay = m > 0 ? m + (m === 1 ? " minute " : " minutes: ") : "";
+  var hDisplay = h > 0 ? h + (h === 1 ? " hour " : " hours ") : "";
+  var mDisplay = m > 0 ? m + (m === 1 ? " minute " : " minutes ") : "";
   var sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
   return (
     <p
@@ -12,7 +17,7 @@ export default function QuestionTimer({ seconds }) {
         fontSize: 17,
       }}
     >
-      Question time left: {mDisplay + sDisplay}
+      Question time left: {hDisplay + mDisplay + sDisplay}
     </p>
   );
 }

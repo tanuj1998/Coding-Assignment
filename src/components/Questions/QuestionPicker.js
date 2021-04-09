@@ -1,23 +1,33 @@
-//Picks a question to send to question display
+/*
+ * Picks a question to send to question display.
+ */
 import questions from "../../questions.json";
 import config from "../../config.json";
-const N = config.boxesNumber;
-console.log(N);
+
+const N = config.boxesNumber; //Number of boxes to make
 const queues = [];
-//Push queues depending upon N
-// [[], [], []]
+/**
+ * Push queues depending upon N
+ * e.g N = 3
+ * queues will become[[], [], []]
+ */
 for (let i = 0; i < N; i++) {
   queues.push([]);
 }
 
-// TODO could shuffle questions before inserting into queues
-
-//Push questions to different queues
+/**
+ * Push questions to different queues. For each queue to have a question,
+ * number of queues < number of total questions.
+ */
+//
 for (let i = 0; i < questions.length; i++) {
   queues[i % N].push(questions[i]);
 }
 
-//Assign timer to each queue
+/**
+ * Assign timer to each queue. First queue is assigned the most time and the time
+ * decreases for each queue afterwards.
+ */
 const queueTimes = []; //Store how much time to allow for questions from each queue
 let queueTime = config.hardestBoxTime;
 for (let i = 0; i < queues.length; i++) {
@@ -25,58 +35,48 @@ for (let i = 0; i < queues.length; i++) {
   queueTime = queueTime - config.timeDecrement;
 }
 
-/*
-0 -> California, Miami, 10-6 //Higest frequency
-1 -> Microsoft, Mars, 10/2
-2 -> Iphone, 2+4, 15*2
-*/
-
 /**
- * Manage or update data structures for algorithm for question picking
+ * Update the queue depending upon user response.
  *
- * @param {Object} question Question that user answered. It's format is that of that coming from questions
- *  input source
- * @param {Boolean} isCorrect Did the user answer correctly
+ * @param {Object} Object with the following fields:
+ *  - question: question Object that user answered.
+ *  - queueIndex: the index of the queue the question needs to pushed.
+ * @param {Boolean} isCorrect Did the user answer correctly.
  */
 const handleQuestionQueue = ({ question, queueIndex }, isCorrect) => {
   if (isCorrect) {
-    //TODO: increase score if answered correctly
-    //If question is not in last queue and answered correctly, move to next queue
+    //If question is not in last queue and answered correctly, move to next queue.
     if (queueIndex !== N - 1) {
       queues[queueIndex + 1].push(question);
     }
 
-    //If question in last queue and answered correctly, push it at end of last queue
+    //If question in last queue and answered correctly, push it at end of last queue.
     else {
       queues[N - 1].push(question);
     }
   }
+
+  //If the question was answered wrong, push it to end of queue 0.
   if (!isCorrect) {
     queues[0].push(question);
   }
-
-  debugger;
 };
 
 /**
  * Pick and return the correct question based on the core algorithm
  *
- * @param {Number} currentQuestionNumber the quiz question number
  * @returns {Object} Object with the following fields:
- *  - question: the question object
+ *  - question: the question picked
+ *  - questionTime: time for the individual question
  *  - queueIndex: the index of the queue the question was picked from
  */
-
-//Decides what queue to pick the question from
 const questionPicker = () => {
   const queueIndex = questionProbability();
 
-  console.log("Index received: " + queueIndex);
   if (queues[queueIndex].length > 0) {
     const question = queues[queueIndex].shift();
     return {
       question,
-      // TODO: specify from bucket and bucket time info
       questionTime: queueTimes[queueIndex],
       queueIndex,
     };
@@ -85,9 +85,12 @@ const questionPicker = () => {
   }
 };
 
-//Sends queueIndex to question picker
+/**
+ * queue with harder questions have a higher probability of being picked.
+ * @returns {Integer} the queueIndex to send to question picker.
+ */
 const questionProbability = () => {
-  let ans = []; //Final array
+  let ans = [];
   let n = queues.length;
   let count = 0;
 
@@ -106,7 +109,6 @@ const questionProbability = () => {
     count++;
   }
   let index = ans[Math.floor(Math.random() * ans.length)]; //Picks a random number from the array
-  console.log("Index sent: " + index);
   return index;
 };
 

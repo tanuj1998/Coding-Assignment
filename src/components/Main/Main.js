@@ -7,6 +7,7 @@ import questionPicker, {
   handleQuestionQueue,
 } from "../Questions/QuestionPicker";
 import config from "../../config.json";
+
 /**
  * question data contains a question, queue index and question time from which the question
  * was picked
@@ -37,7 +38,7 @@ export default function Main() {
     }
   }, [showScore, quizSeconds]);
 
-  //For current question timer
+  //For individual question timer
   useEffect(() => {
     if (!showScore) {
       if (questionSeconds > 0) {
@@ -52,9 +53,18 @@ export default function Main() {
     }
   }, [questionSeconds, currentQuestionData]);
 
+  /**
+   * If question answered correctly, increase score by 1 and call handleQuestionQueue
+   * to put the question data in the right queue.
+   *
+   * If question answered incorrectly, handleQuestionQueue puts the question data in queue[0]
+   *
+   * Set question data for the next question to be shown
+   */
   const handleAnswerOptionClick = (questionData, isCorrect) => {
     handleQuestionQueue(questionData, isCorrect);
-    totalQuestions++;
+    totalQuestions++; //Increase total number of questions attempted by the user.
+
     //Increase score by 1 if answered correctly
     if (isCorrect) {
       setScore(score + 1);
@@ -80,6 +90,7 @@ export default function Main() {
         style={{
           color: "#F0178A",
           fontSize: 50,
+          marginBottom: 10,
         }}
       >
         Quiz

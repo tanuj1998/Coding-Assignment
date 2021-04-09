@@ -2,5 +2,5 @@
   "boxesNumber": 3,
   "quizTime": 30,
   "hardestBoxTime": 10,
-  "timeDecrement": 3
+  "timeDecrement": 5
 }

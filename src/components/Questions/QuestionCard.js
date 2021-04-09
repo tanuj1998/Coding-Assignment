@@ -1,8 +1,11 @@
 import React from "react";
+import "./QuestionCard.css";
 /**
  * Makes a question display given a question
  *
- * @param {Object} question Question to display
+ * @param {Object} object with the following fields:
+ *  - question: question to display
+ *  - handleAnswerOptionClick: decides what to do depending upon what answer the user clicked.
  */
 const QuestionCard = ({ question, handleAnswerOptionClick }) => {
   return (
