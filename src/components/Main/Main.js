@@ -8,7 +8,7 @@ import questionPicker, {
 } from "../Questions/QuestionPicker";
 import config from "../../config.json";
 /**
- * question data contains a question and the queue index from which the question
+ * question data contains a question, queue index and question time from which the question
  * was picked
  */
 const initialQuestionData = questionPicker(0);
@@ -39,44 +39,28 @@ export default function Main() {
 
   //For current question timer
   useEffect(() => {
-    if (questionSeconds > 0) {
-      const timer = setTimeout(
-        () => setQuestionSeconds(questionSeconds - 1),
-        1000
-      );
-      return () => clearTimeout(timer);
-    } else {
-      //Todo: Move question data to queue 0
-      //Show next question with its timer
-      handleAnswerOptionClick(currentQuestionData, false);
+    if (!showScore) {
+      if (questionSeconds > 0) {
+        const timer = setTimeout(
+          () => setQuestionSeconds(questionSeconds - 1),
+          1000
+        );
+        return () => clearTimeout(timer);
+      } else {
+        handleAnswerOptionClick(currentQuestionData, false);
+      }
     }
   }, [questionSeconds, currentQuestionData]);
-  // useEffect(() => {
-  //   if (questionSeconds > 0) {
-  //     setTimeout(() => setQuestionSeconds(questionSeconds - 1), 1000);
-  //   } else {
-  //     const nextQuestionNumber = currentQuestionNumber + 1;
-  //     //totalQuestions+1 will always be greater tah nextQuestNumber that way questions will keep appearing until timer runs out
-  //     if (nextQuestionNumber < totalQuestions + 1) {
-  //       setCurrentQuestionNumber(nextQuestionNumber);
-  //       setCurrentQuestionData(questionPicker());
-  //     }
-  //   }
-  //   const timer = setTimeout(() => {});
-
-  //   // clean up / cancel the current question's timer
-  //   return () => clearTimeout(timer);
-  // }, [questionData, questionSeconds]);
 
   const handleAnswerOptionClick = (questionData, isCorrect) => {
-    // update algorithm related data structures
     handleQuestionQueue(questionData, isCorrect);
     totalQuestions++;
     //Increase score by 1 if answered correctly
-    console.log("Q No.: " + totalQuestions);
     if (isCorrect) {
       setScore(score + 1);
     }
+
+    //Set question data for next question to be presented to user
     setCurrentQuestionNumber(
       (currentQuestionNumber) => currentQuestionNumber + 1
     );
